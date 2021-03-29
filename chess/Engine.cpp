@@ -18,7 +18,7 @@ Engine::~Engine()
 }
 void Engine::runEngine()
 {
-	Event event;
+	/*Event event;
 	Vector2i pos(Mouse::getPosition(*window));
 	Texture t1;
 	t1.loadFromFile("images/figury.png");
@@ -36,15 +36,15 @@ void Engine::runEngine()
 		if (event.key.code == Mouse::Left)
 			isMove = false;
 
-	if(isMove) s1.setPosition(pos.x-dx,pos.y-dy);
-
+	if(isMove) s1.setPosition(pos.x-dx,pos.y-dy);*/
+	draw();
 
 }
 
 void Engine::draw()
 {
 	Texture t;
-	t.loadFromFile("images/figury.png");
+	t.loadFromFile("images/board.png");
 	Sprite s(t);
 	window->clear(sf::Color::White);
 	window->draw(s);
