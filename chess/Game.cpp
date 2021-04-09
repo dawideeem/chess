@@ -7,7 +7,7 @@ Game::Game(void)
 	ContextSettings settings;
 	settings.antialiasingLevel = 8;
 
-	window.create(VideoMode(600, 600), "Chess Game", Style::Default,
+	window.create(VideoMode(800, 800), "Chess Game", Style::Default,
 		settings);
 
 	state = END;
@@ -64,7 +64,7 @@ void Game::menu()
 		tekst[i].setCharacterSize(65);
 
 		tekst[i].setString(str[i]);
-		tekst[i].setPosition(600 / 2 - tekst[i].getGlobalBounds().width / 2, 100 + i * 100);
+		tekst[i].setPosition(800 / 2 - tekst[i].getGlobalBounds().width / 2, 100 + i * 100);
 	}
 
 	while (state == MENU)
