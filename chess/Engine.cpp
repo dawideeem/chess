@@ -37,7 +37,7 @@ void Engine::runEngine()
 
 	Texture t1, t2;
 	t1.loadFromFile("images/figures1.png");
-	t2.loadFromFile("images/board.png");
+	t2.loadFromFile("images/board1.png");
 	Sprite s(t1);
 	Sprite s1(t2);
 
