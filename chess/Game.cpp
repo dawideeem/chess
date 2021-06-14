@@ -40,6 +40,9 @@ void Game::runGame()
 		case GAME:
 			single();
 			break;
+		case GAME2:
+			comp();
+			break;
 		}
 	}
 }
@@ -89,7 +92,7 @@ void Game::menu()
 			else if (tekst[1].getGlobalBounds().contains(mouse) &&
 				event.type == Event::MouseButtonReleased && event.key.code == Mouse::Left)
 			{
-				state = GAME;
+				state = GAME2;
 			}
 
 			//klikniêcie EXIT
@@ -125,4 +128,13 @@ void Game::single()
 	engine.runEngine();
 
 	state = GAME; 
+}
+
+void Game::comp()
+{
+	AlEngine Alengine(window);
+
+	Alengine.runAlEngine();
+
+	state = GAME2;
 }

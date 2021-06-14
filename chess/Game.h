@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <string>
 #include "engine.h"
+#include "AlEngine.h"
 
 using namespace std;
 using namespace sf;
@@ -17,7 +18,7 @@ public:
 	void runGame();
 
 protected:
-	enum GameState { MENU, GAME, GAME_OVER, END };
+	enum GameState { MENU, GAME, GAME2, END };
 	GameState state;
 
 private:
@@ -25,4 +26,5 @@ private:
 
 	void menu();
 	void single();
+	void comp();
 };

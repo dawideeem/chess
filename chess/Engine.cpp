@@ -379,9 +379,10 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 {
 	for (int i = ox - 1; i >= 0; i--) // Left
 	{
-		if (board[oy][i] >= 0 && (nx == i && ny == oy))
+		if (board[oy][i] <= 0 && (nx == i && ny == oy))
 		{
 			return 1;
+			
 		}
 		else if (board[oy][i] != 0)
 		{
@@ -390,7 +391,7 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 	}
 	for (int i = oy - 1; i >= 0; i--) // Up
 	{
-		if (board[i][ox] >= 0 && (ny == i && nx == ox))
+		if (board[i][ox] <= 0 && (ny == i && nx == ox))
 		{
 			return 1;
 		}
@@ -401,7 +402,7 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 	}
 	for (int i = ox + 1; i <= 7; i++) // right
 	{
-		if (board[oy][i] >= 0 && (ny == oy && nx == i))
+		if (board[oy][i] <= 0 && (ny == oy && nx == i))
 		{
 			return 1;
 		}
@@ -412,7 +413,7 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 	}
 	for (int i = oy + 1; i <= 7; i++) // Down
 	{
-		if (board[i][ox] >= 0 && (ny == i && nx == ox))
+		if (board[i][ox] <= 0 && (ny == i && nx == ox))
 		{
 			return 1;
 		}
@@ -424,7 +425,7 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Left
 	{
-		if (board[i][j] >= 0 && (ny == i && nx == j))
+		if (board[i][j] <= 0 && (ny == i && nx == j))
 		{
 			return 1;
 		}
@@ -437,7 +438,7 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Right
 	{
-		if (board[i][j] >= 0 && (ny == i && nx == j))
+		if (board[i][j] <= 0 && (ny == i && nx == j))
 		{
 			return 1;
 		}
@@ -450,7 +451,7 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // Down left
 	{
-		if (board[i][j] >= 0 && (ny == i && nx == j))
+		if (board[i][j] <= 0 && (ny == i && nx == j))
 		{
 			return 1;
 		}
@@ -463,7 +464,7 @@ int Engine::QueenB(int ox, int oy, int nx, int ny)
 	j = ox + 1;
 	for (int i = oy + 1; i <= 7; i++)  // Down Right
 	{
-		if (board[i][j] >= 0 && (ny == i && nx == j))
+		if (board[i][j] <= 0 && (ny == i && nx == j))
 		{
 			return 1;
 		}
@@ -550,12 +551,12 @@ int Engine::KnightB(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int Engine::PionWCheck(int posx, int posy, int regex, int regey)
+int Engine::PionWCheck(int posx, int posy, int kingx, int kingy)
 {
-	//std::cout << "ox=" << posx << " oy=" << posy << " regex=" << regex << " regey=" << regey << "\n\n\n";
+	//std::cout << "ox=" << posx << " oy=" << posy << " kingx=" << kingx << " kingy=" << kingy << "\n\n\n";
 	if (board[posy - 1][posx - 1] >= 0)
 	{
-		if (posy - 1 == regey && posx - 1 == regex)
+		if (posy - 1 == kingy && posx - 1 == kingx)
 		{
 			return 1;
 		}
@@ -563,7 +564,7 @@ int Engine::PionWCheck(int posx, int posy, int regex, int regey)
 	if (board[posy - 1][posx + 1] >= 0)
 	{
 		//std::cout << "yy";
-		if (posy - 1 == regey && posx + 1 == regex)
+		if (posy - 1 == kingy && posx + 1 == kingx)
 		{
 			return 1;
 		}
@@ -571,11 +572,11 @@ int Engine::PionWCheck(int posx, int posy, int regex, int regey)
 	return 0;
 }
 
-int Engine::RookWCheck(int ox, int oy, int regex, int regey)
+int Engine::RookWCheck(int ox, int oy, int kingx, int kingy)
 {
 	for (int i = ox - 1; i >= 0; i--) // Left
 	{
-		if (board[oy][i] >= 0 && (regex == i && regey == oy))
+		if (board[oy][i] >= 0 && (kingx == i && kingy == oy))
 		{
 			return 1;
 		}
@@ -586,7 +587,7 @@ int Engine::RookWCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // Up
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -597,7 +598,7 @@ int Engine::RookWCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LENGHT; i++) // Right
 	{
-		if (board[oy][i] >= 0 && (regey == oy && regex == i))
+		if (board[oy][i] >= 0 && (kingy == oy && kingx == i))
 		{
 			return 1;
 		}
@@ -608,7 +609,7 @@ int Engine::RookWCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LENGHT; i++) // Down
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -620,12 +621,12 @@ int Engine::RookWCheck(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int Engine::BishopWCheck(int ox, int oy, int regex, int regey)
+int Engine::BishopWCheck(int ox, int oy, int kingx, int kingy)
 {
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Left
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -638,7 +639,7 @@ int Engine::BishopWCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Right
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -651,7 +652,7 @@ int Engine::BishopWCheck(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // Down Left
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -664,7 +665,7 @@ int Engine::BishopWCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i <= 7; i++)  // Down Right
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -677,11 +678,11 @@ int Engine::BishopWCheck(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
+int Engine::QueenWCheck(int ox, int oy, int kingx, int kingy)
 {
 	for (int i = ox - 1; i >= 0; i--) // Left
 	{
-		if (board[oy][i] >= 0 && (regex == i && regey == oy))
+		if (board[oy][i] >= 0 && (kingx == i && kingy == oy))
 		{
 			return 1;
 		}
@@ -692,7 +693,7 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // Up
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -703,7 +704,7 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LENGHT; i++) // Right
 	{
-		if (board[oy][i] >= 0 && (regey == oy && regex == i))
+		if (board[oy][i] >= 0 && (kingy == oy && kingx == i))
 		{
 			return 1;
 		}
@@ -714,7 +715,7 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LENGHT; i++) // Down
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -726,7 +727,7 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Left
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -739,7 +740,7 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Right
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -752,7 +753,7 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // Down Left
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -765,7 +766,7 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i < LENGHT; i++)  // Down Right
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -778,92 +779,92 @@ int Engine::QueenWCheck(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int Engine::KnightWCheck(int ox, int oy, int regex, int regey)
+int Engine::KnightWCheck(int ox, int oy, int kingx, int kingy)
 {
-	if (oy - 2 >= 0 && ox - 1 >= 0 && regey == oy - 2 && regex == ox - 1 && board[regey][regex] >= 0)
+	if (oy - 2 >= 0 && ox - 1 >= 0 && kingy == oy - 2 && kingx == ox - 1 && board[kingy][kingx] >= 0)
 	{
 		return 1; // Up Left
 	}
-	if (oy - 2 >= 0 && ox + 1 < LENGHT && regey == oy - 2 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (oy - 2 >= 0 && ox + 1 < LENGHT && kingy == oy - 2 && kingx == ox + 1 && board[kingy][kingx] >= 0)
 	{
 		return 1; // Up Right
 	}
-	if (oy - 1 >= 0 && ox + 2 < LENGHT && regey == oy - 1 && regex == ox + 2 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox + 2 < LENGHT && kingy == oy - 1 && kingx == ox + 2 && board[kingy][kingx] >= 0)
 	{
 		return 1; // RIght 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LENGHT && regey == oy + 1 && regex == ox + 2 && board[regey][regex] >= 0)
+	if (oy + 1 >= 0 && ox + 2 < LENGHT && kingy == oy + 1 && kingx == ox + 2 && board[kingy][kingx] >= 0)
 	{
 		return 1; // Right 2
 	}
-	if (oy + 2 < LENGHT && ox + 1 < LENGHT && regey == oy + 2 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (oy + 2 < LENGHT && ox + 1 < LENGHT && kingy == oy + 2 && kingx == ox + 1 && board[kingy][kingx] >= 0)
 	{
 		return 1; // Down 1
 	}
-	if (oy + 2 < LENGHT && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] >= 0)
+	if (oy + 2 < LENGHT && ox - 1 >= 0 && kingy == oy + 2 && kingx == ox - 1 && board[kingy][kingx] >= 0)
 	{
 		return 1; // Down 2
 	}
-	if (oy + 1 < LENGHT && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] >= 0)
+	if (oy + 1 < LENGHT && ox - 2 >= 0 && kingy == oy + 1 && kingx == ox - 2 && board[kingy][kingx] >= 0)
 	{
 		return 1; // Left 1
 	}
-	if (oy - 1 >= 0 && ox - 2 >= 0 && regey == oy - 1 && regex == ox - 2 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox - 2 >= 0 && kingy == oy - 1 && kingx == ox - 2 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
 	return 0;
 }
 
-int Engine::KingWCheck(int ox, int oy, int regex, int regey)
+int Engine::KingWCheck(int ox, int oy, int kingx, int kingy)
 {
-	if (ox - 1 >= 0 && oy - 1 >= 0 && regey == oy - 1 && regex == ox - 1 && board[regey][regex] <= 0)
+	if (ox - 1 >= 0 && oy - 1 >= 0 && kingy == oy - 1 && kingx == ox - 1 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && regex == ox && regey == oy - 1 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && kingx == ox && kingy == oy - 1 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && ox + 1 < LENGHT && regex == ox + 1 && regey == oy - 1 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox + 1 < LENGHT && kingx == ox + 1 && kingy == oy - 1 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LENGHT && regey == oy && regex == ox + 1 && board[regey][regex] <= 0)
+	if (ox + 1 < LENGHT && kingy == oy && kingx == ox + 1 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LENGHT && oy + 1 < LENGHT && regey == oy + 1 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (ox + 1 < LENGHT && oy + 1 < LENGHT && kingy == oy + 1 && kingx == ox + 1 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
-	if (oy + 1 < LENGHT && regey == oy + 1 && regex == ox && board[regey][regex] <= 0)
+	if (oy + 1 < LENGHT && kingy == oy + 1 && kingx == ox && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && oy + 1 < LENGHT && regex == ox - 1 && regey == oy + 1 && board[regey][regex] <= 0)
+	if (ox - 1 >= 0 && oy + 1 < LENGHT && kingx == ox - 1 && kingy == oy + 1 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && regey == oy && regex == ox - 1 && board[regey][regex] <= 0)
+	if (ox - 1 >= 0 && kingy == oy && kingx == ox - 1 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
 	return 0;
 }
 
-int Engine::PionBCheck(int ox, int oy, int regex, int regey)
+int Engine::PionBCheck(int ox, int oy, int kingx, int kingy)
 {
 	if (board[oy + 1][ox - 1] <= 0)
 	{
-		if (regey == oy + 1 && regex == ox - 1)
+		if (kingy == oy + 1 && kingx == ox - 1)
 		{
 			return 1;
 		}
 	}
 	if (board[oy + 1][ox + 1] <= 0)
 	{
-		if (regey == oy + 1 && regex == ox + 1)
+		if (kingy == oy + 1 && kingx == ox + 1)
 		{
 			return 1;
 		}
@@ -871,11 +872,11 @@ int Engine::PionBCheck(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int Engine::RookBCheck(int ox, int oy, int regex, int regey)
+int Engine::RookBCheck(int ox, int oy, int kingx, int kingy)
 {
 	for (int i = ox - 1; i >= 0; i--) // Left
 	{
-		if (board[oy][i] <= 0 && (regex == i && regey == oy))
+		if (board[oy][i] <= 0 && (kingx == i && kingy == oy))
 		{
 			return 1;
 		}
@@ -886,7 +887,7 @@ int Engine::RookBCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // Up
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -897,7 +898,7 @@ int Engine::RookBCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LENGHT; i++) // Right
 	{
-		if (board[oy][i] <= 0 && (regey == oy && regex == i))
+		if (board[oy][i] <= 0 && (kingy == oy && kingx == i))
 		{
 			return 1;
 		}
@@ -908,7 +909,7 @@ int Engine::RookBCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LENGHT; i++) // Down
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -920,12 +921,12 @@ int Engine::RookBCheck(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int Engine::BishopBCheck(int ox, int oy, int regex, int regey)
+int Engine::BishopBCheck(int ox, int oy, int kingx, int kingy)
 {
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // Up left
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -938,7 +939,7 @@ int Engine::BishopBCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Right
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -951,7 +952,7 @@ int Engine::BishopBCheck(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // Down left
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -964,7 +965,7 @@ int Engine::BishopBCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i <= 7; i++)  // Down Right
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -977,11 +978,11 @@ int Engine::BishopBCheck(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
+int Engine::QueenBCheck(int ox, int oy, int kingx, int kingy)
 {
 	for (int i = ox - 1; i >= 0; i--) // Left
 	{
-		if (board[oy][i] <= 0 && (regex == i && regey == oy))
+		if (board[oy][i] <= 0 && (kingx == i && kingy == oy))
 		{
 			return 1;
 		}
@@ -992,7 +993,7 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // Up
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -1003,7 +1004,7 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LENGHT; i++) // Right
 	{
-		if (board[oy][i] <= 0 && (regey == oy && regex == i))
+		if (board[oy][i] <= 0 && (kingy == oy && kingx == i))
 		{
 			return 1;
 		}
@@ -1014,7 +1015,7 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LENGHT; i++) // Down
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (kingy == i && kingx == ox))
 		{
 			return 1;
 		}
@@ -1026,7 +1027,7 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Left
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -1039,7 +1040,7 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // Up Right
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -1052,7 +1053,7 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // Down Left
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -1065,7 +1066,7 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i < LENGHT; i++)  // Down Right
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (kingy == i && kingx == j))
 		{
 			return 1;
 		}
@@ -1078,81 +1079,81 @@ int Engine::QueenBCheck(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int Engine::KnightBCheck(int ox, int oy, int regex, int regey)
+int Engine::KnightBCheck(int ox, int oy, int kingx, int kingy)
 {
-	if (oy - 2 >= 0 && ox - 1 >= 0 && regey == oy - 2 && regex == ox - 1 && board[regey][regex] <= 0)
+	if (oy - 2 >= 0 && ox - 1 >= 0 && kingy == oy - 2 && kingx == ox - 1 && board[kingy][kingx] <= 0)
 	{
 		return 1; // Up left
 	}
-	if (oy - 2 >= 0 && ox + 1 < LENGHT && regey == oy - 2 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (oy - 2 >= 0 && ox + 1 < LENGHT && kingy == oy - 2 && kingx == ox + 1 && board[kingy][kingx] <= 0)
 	{
 		return 1; // Up Right
 	}
-	if (oy - 1 >= 0 && ox + 2 < LENGHT && regey == oy - 1 && regex == ox + 2 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox + 2 < LENGHT && kingy == oy - 1 && kingx == ox + 2 && board[kingy][kingx] <= 0)
 	{
 		return 1; // Right 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LENGHT && regey == oy + 1 && regex == ox + 2 && board[regey][regex] <= 0)
+	if (oy + 1 >= 0 && ox + 2 < LENGHT && kingy == oy + 1 && kingx == ox + 2 && board[kingy][kingx] <= 0)
 	{
 		return 1; // Right 2
 	}
-	if (oy + 2 < LENGHT && ox + 1 < LENGHT && regey == oy + 2 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (oy + 2 < LENGHT && ox + 1 < LENGHT && kingy == oy + 2 && kingx == ox + 1 && board[kingy][kingx] <= 0)
 	{
 		return 1; // Down 1
 	}
-	if (oy + 2 < LENGHT && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] <= 0)
+	if (oy + 2 < LENGHT && ox - 1 >= 0 && kingy == oy + 2 && kingx == ox - 1 && board[kingy][kingx] <= 0)
 	{
 		return 1; // Down 2
 	}
-	if (oy + 1 < LENGHT && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] <= 0)
+	if (oy + 1 < LENGHT && ox - 2 >= 0 && kingy == oy + 1 && kingx == ox - 2 && board[kingy][kingx] <= 0)
 	{
 		return 1; // Left 1
 	}
-	if (oy - 1 >= 0 && ox - 2 >= 0 && regey == oy - 1 && regex == ox - 2 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox - 2 >= 0 && kingy == oy - 1 && kingx == ox - 2 && board[kingy][kingx] <= 0)
 	{
 		return 1;
 	}
 	return 0;
 }
 
-int Engine::KingBCheck(int ox, int oy, int regex, int regey)
+int Engine::KingBCheck(int ox, int oy, int kingx, int kingy)
 {
-	if (ox - 1 >= 0 && oy - 1 >= 0 && regey == oy - 1 && regex == ox - 1 && board[regey][regex] >= 0)
+	if (ox - 1 >= 0 && oy - 1 >= 0 && kingy == oy - 1 && kingx == ox - 1 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && regex == ox && regey == oy - 1 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && kingx == ox && kingy == oy - 1 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && ox + 1 < LENGHT && regex == ox + 1 && regey == oy - 1 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox + 1 < LENGHT && kingx == ox + 1 && kingy == oy - 1 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LENGHT && regey == oy && regex == ox + 1 && board[regey][regex] >= 0)
+	if (ox + 1 < LENGHT && kingy == oy && kingx == ox + 1 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LENGHT && oy + 1 < LENGHT && regey == oy + 1 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (ox + 1 < LENGHT && oy + 1 < LENGHT && kingy == oy + 1 && kingx == ox + 1 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
-	if (oy + 1 < LENGHT && regey == oy + 1 && regex == ox && board[regey][regex] >= 0)
+	if (oy + 1 < LENGHT && kingy == oy + 1 && kingx == ox && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && oy + 1 < LENGHT && regex == ox - 1 && regey == oy + 1 && board[regey][regex] >= 0)
+	if (ox - 1 >= 0 && oy + 1 < LENGHT && kingx == ox - 1 && kingy == oy + 1 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && regey == oy && regex == ox - 1 && board[regey][regex] >= 0)
+	if (ox - 1 >= 0 && kingy == oy && kingx == ox - 1 && board[kingy][kingx] >= 0)
 	{
 		return 1;
 	}
 	return 0;
 }
 
-int Engine::CheckForBlackKing(int posRegex, int posRegey)
+int Engine::CheckForBlackKing(int posKingx, int posKingy)
 {
 	int ok = 0;
 	for (int i = 0; i < LENGHT; i++)
@@ -1163,27 +1164,27 @@ int Engine::CheckForBlackKing(int posRegex, int posRegey)
 			{
 				if (board[i][j] == pawnWHITE)
 				{
-					ok = PionWCheck(j, i, posRegex, posRegey);
+					ok = PionWCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == rookWHITE)
 				{
-					ok = RookWCheck(j, i, posRegex, posRegey);
+					ok = RookWCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == knightWHITE)
 				{
-					ok = KnightWCheck(j, i, posRegex, posRegey);
+					ok = KnightWCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == bishopWHITE)
 				{
-					ok = BishopWCheck(j, i, posRegex, posRegey);
+					ok = BishopWCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == queenWHITE)
 				{
-					ok = QueenWCheck(j, i, posRegex, posRegey);
+					ok = QueenWCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == kingWHITE)
 				{
-					ok = KingWCheck(j, i, posRegex, posRegey);
+					ok = KingWCheck(j, i, posKingx, posKingy);
 				}
 				if (ok == 1)
 				{
@@ -1310,7 +1311,7 @@ int Engine::KingB(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int Engine::CheckForWhiteKing(int posRegex, int posRegey)
+int Engine::CheckForWhiteKing(int posKingx, int posKingy)
 {
 	int ok = 0;
 	for (int i = 0; i < LENGHT; i++)
@@ -1321,27 +1322,27 @@ int Engine::CheckForWhiteKing(int posRegex, int posRegey)
 			{
 				if (board[i][j] == pawnBLACK)
 				{
-					ok = PionBCheck(j, i, posRegex, posRegey);
+					ok = PionBCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == rookBLACK)
 				{
-					ok = RookBCheck(j, i, posRegex, posRegey);
+					ok = RookBCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == knightBLACK)
 				{
-					ok = KnightBCheck(j, i, posRegex, posRegey);
+					ok = KnightBCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == bishopBLACK)
 				{
-					ok = BishopBCheck(j, i, posRegex, posRegey);
+					ok = BishopBCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == queenBLACK)
 				{
-					ok = QueenBCheck(j, i, posRegex, posRegey);
+					ok = QueenBCheck(j, i, posKingx, posKingy);
 				}
 				if (board[i][j] == kingBLACK)
 				{
-					ok = KingBCheck(j, i, posRegex, posRegey);
+					ok = KingBCheck(j, i, posKingx, posKingy);
 				}
 				if (ok == 1)
 				{
@@ -1741,6 +1742,8 @@ void Engine::runEngine()
 					}
 				}
 			}
+
+
 			if (e.type == Event::MouseButtonReleased)
 			{
 				if (e.key.code == Mouse::Left)
@@ -1939,6 +1942,7 @@ void Engine::runEngine()
 				}
 			}
 		}
+
 		// display //
 		window->clear();
 		window->draw(chessboard);

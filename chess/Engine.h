@@ -62,24 +62,26 @@ class Engine
 	int QueenB(int ox, int oy, int nx, int ny);
 	int KnightW(int ox, int oy, int nx, int ny);
 	int KnightB(int ox, int oy, int nx, int ny);
-	int PionWCheck(int posx, int posy, int regex, int regey);
-	int RookWCheck(int ox, int oy, int regex, int regey);
-	int BishopWCheck(int ox, int oy, int regex, int regey);
-	int QueenWCheck(int ox, int oy, int regex, int regey);
-	int KnightWCheck(int ox, int oy, int regex, int regey);
-	int KingWCheck(int ox, int oy, int regex, int regey);
-	int PionBCheck(int ox, int oy, int regex, int regey);
-	int RookBCheck(int ox, int oy, int regex, int regey);
-	int BishopBCheck(int ox, int oy, int regex, int regey);
-	int QueenBCheck(int ox, int oy, int regex, int regey);
-	int KnightBCheck(int ox, int oy, int regex, int regey);
-	int KingBCheck(int ox, int oy, int regex, int regey);
-	int CheckForBlackKing(int posRegex, int posRegey);
+	int PionWCheck(int posx, int posy, int kingx, int kingy);
+	int RookWCheck(int ox, int oy, int kingx, int kingy);
+	int BishopWCheck(int ox, int oy, int kingx, int kingy);
+	int QueenWCheck(int ox, int oy, int kingx, int kingy);
+	int KnightWCheck(int ox, int oy, int kingx, int kingy);
+	int KingWCheck(int ox, int oy, int kingx, int kingy);
+	int PionBCheck(int ox, int oy, int kingx, int kingy);
+	int RookBCheck(int ox, int oy, int kingx, int kingy);
+	int BishopBCheck(int ox, int oy, int kingx, int kingy);
+	int QueenBCheck(int ox, int oy, int kingx, int kingy);
+	int KnightBCheck(int ox, int oy, int kingx, int kingy);
+	int KingBCheck(int ox, int oy, int kingx, int kingy);
+	int CheckForBlackKing(int posKingx, int posKingy);
 	int KingB(int ox, int oy, int nx, int ny);
-	int CheckForWhiteKing(int posRegex, int posRegey);
+	int CheckForWhiteKing(int posKingx, int posKingy);
 	int KingW(int ox, int oy, int nx, int ny);
 	void pozKingWhite();
 	void pozKingBlack();
+
+
 
 
 public:
