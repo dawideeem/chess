@@ -41,7 +41,6 @@ void Game::runGame()
 			single();
 			break;
 		case GAME2:
-			comp();
 			break;
 		}
 	}
@@ -128,13 +127,4 @@ void Game::single()
 	engine.runEngine();
 
 	state = GAME; 
-}
-
-void Game::comp()
-{
-	AlEngine Alengine(window);
-
-	Alengine.runAlEngine();
-
-	state = GAME2;
 }

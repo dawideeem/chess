@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <string>
 #include "engine.h"
-#include "AlEngine.h"
+
 
 using namespace std;
 using namespace sf;
@@ -26,5 +26,5 @@ private:
 
 	void menu();
 	void single();
-	void comp();
+
 };
